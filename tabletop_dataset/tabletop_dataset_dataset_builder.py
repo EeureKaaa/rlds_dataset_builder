@@ -9,9 +9,11 @@ import tensorflow_datasets as tfds
 import tensorflow_hub as hub
 from PIL import Image
 
+instruction = "Close the door"
+hdf5_dir = "/home/wangxianhao/data/project/reasoning/Datasets/datasets/Tabletop-Close-Door-v1/ar_teleop"
 
-class TabletopDataset(tfds.core.GeneratorBasedBuilder):
-    """DatasetBuilder for Tabletop-PickPlace dataset."""
+class CloseDoorDataset(tfds.core.GeneratorBasedBuilder):
+    """DatasetBuilder for Tabletop-Lift-Book dataset."""
 
     VERSION = tfds.core.Version('1.0.0')
     RELEASE_NOTES = {
@@ -98,7 +100,7 @@ class TabletopDataset(tfds.core.GeneratorBasedBuilder):
         """Define data splits."""
         # You can modify this to create train/val splits if needed
         return {
-            'train': self._generate_examples(path='/media/raid/workspace/wangxianhao/project/reasoning/Datasets/datasets/Tabletop-Lift-Book-v1/ar_teleop'),
+            'train': self._generate_examples(path=hdf5_dir),
         }
 
     def _generate_examples(self, path) -> Iterator[Tuple[str, Any]]:
@@ -108,10 +110,14 @@ class TabletopDataset(tfds.core.GeneratorBasedBuilder):
             # Load HDF5 file
             with h5py.File(episode_path, 'r') as f:
                 # Get actions and determine number of steps
-                actions = np.array(f['traj_0/actions'])
+                actions = np.array(f['traj_0/actions'], dtype=np.float32)
+                # Pad the actions array with zeros to make dimensions match observations
+                action_shape = actions.shape[1]
+                actions = np.vstack([actions, np.zeros((1, action_shape), dtype=np.float32)])
                 num_steps = len(actions)
                 
                 # Get RGB images
+                base_rgb = np.array(f['traj_0/obs/sensor_data/base_camera/rgb'])
                 base_front_rgb = np.array(f['traj_0/obs/sensor_data/base_front_camera/rgb'])
                 hand_rgb = np.array(f['traj_0/obs/sensor_data/hand_camera/rgb'])
                 
@@ -126,14 +132,15 @@ class TabletopDataset(tfds.core.GeneratorBasedBuilder):
                 truncated = np.array(f['traj_0/truncated']) if 'traj_0/truncated' in f else np.zeros(num_steps, dtype=bool)
                 
                 # Create a default language instruction (modify as needed)
-                language_instruction = "Lift the book"
+                language_instruction = instruction
                 language_embedding = self._embed([language_instruction])[0].numpy()
                 
                 # Assemble episode
                 episode = []
                 for i in range(num_steps):
                     # Resize images to 224x224
-                    base_img = Image.fromarray(base_front_rgb[i]).resize((224, 224), Image.Resampling.LANCZOS)
+                    base_img = Image.fromarray(base_rgb[i]).resize((224, 224), Image.Resampling.LANCZOS)
+                    base_front_img = Image.fromarray(base_front_rgb[i]).resize((224, 224), Image.Resampling.LANCZOS)
                     hand_img = Image.fromarray(hand_rgb[i]).resize((224, 224), Image.Resampling.LANCZOS)
                     
                     # Extract joint state (first 7 dimensions of qpos) 
@@ -146,6 +153,7 @@ class TabletopDataset(tfds.core.GeneratorBasedBuilder):
                         'observation': {
                             'image': np.array(base_img),
                             'wrist_image': np.array(hand_img),
+                            'base_front_image': np.array(base_front_img),
                             'joint_state': joint_state,
                             'state': state,
                         },
