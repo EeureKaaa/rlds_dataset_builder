@@ -1,0 +1,14 @@
+{
+  "datasets": [
+    {
+      "name": "tabletop_pickplace_apple",
+      "instruction": "Pick up the apple and place it to the marker",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets/Tabletop-PickPlace-Apple-v1/ar_teleop"
+    },  
+    {
+      "name": "tabletop_close_door",
+      "instruction": "Close the door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets/Tabletop-Close-Door-v1/ar_teleop"
+    }
+  ]
+}
