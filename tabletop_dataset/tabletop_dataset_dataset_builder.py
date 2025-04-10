@@ -12,7 +12,7 @@ from PIL import Image
 instruction = "Close the door"
 hdf5_dir = "/home/wangxianhao/data/project/reasoning/Datasets/datasets/Tabletop-Close-Door-v1/ar_teleop"
 
-class CloseDoorDataset(tfds.core.GeneratorBasedBuilder):
+class CloseDoorDatasetV2(tfds.core.GeneratorBasedBuilder):
     """DatasetBuilder for Tabletop-Lift-Book dataset."""
 
     VERSION = tfds.core.Version('1.0.0')
@@ -42,6 +42,12 @@ class CloseDoorDataset(tfds.core.GeneratorBasedBuilder):
                             dtype=np.uint8,
                             encoding_format='png',
                             doc='Hand camera RGB observation.',
+                        ),
+                        'base_front_image': tfds.features.Image(
+                            shape=(224, 224, 3),
+                            dtype=np.uint8,
+                            encoding_format='png',
+                            doc='Base front camera RGB observation.',
                         ),
                         'joint_state': tfds.features.Tensor(
                             shape=(7,),
