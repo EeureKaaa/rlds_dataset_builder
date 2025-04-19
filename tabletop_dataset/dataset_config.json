@@ -1,0 +1,109 @@
+{
+  "datasets": [
+    {
+      "name": "Tabletop-Put-Ball-IntoContainer-v1",
+      "instruction": "put the ball into the container ",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Put-Ball-IntoContainer-v1"
+    },
+    {
+      "name": "Tabletop-Put-Ball-IntoContainer-v1",
+      "instruction": "place the ball in the container",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Put-Ball-IntoContainer-v1"
+    },
+    {
+      "name": "Tabletop-Put-Ball-IntoContainer-v1",
+      "instruction": "insert the ball into the container",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Put-Ball-IntoContainer-v1"
+    },
+    {
+      "name": "Tabletop-Stack-Cubes-v1",
+      "instruction": "stack all the cube",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Stack-Cubes-v1"
+    },
+    {
+      "name": "Tabletop-Stack-Cubes-v1",
+      "instruction": "arrange the cubes into a stack",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Stack-Cubes-v1"
+    },
+    {
+      "name": "Tabletop-Stack-Cubes-v1",
+      "instruction": "build a tower using all the cubes",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Stack-Cubes-v1"
+    },
+    {
+      "name": "Tabletop-Open-Trigger-v1",
+      "instruction": "turn on the trigger",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Trigger-v1"
+    },
+    {
+      "name": "Tabletop-Open-Trigger-v1",
+      "instruction": "activate the trigger",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Trigger-v1"
+    },
+    {
+      "name": "Tabletop-Open-Trigger-v1",
+      "instruction": "engage the trigger",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Trigger-v1"
+    },
+    {
+      "name": "Tabletop-Open-Door-v1",
+      "instruction": "open the door ",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Door-v1"
+    },
+    {
+      "name": "Tabletop-Open-Door-v1",
+      "instruction": "pull the door open",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Door-v1"
+    },
+    {
+      "name": "Tabletop-Open-Door-v1",
+      "instruction": "unlock and swing the door open",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Door-v1"
+    },
+    {
+      "name": "Tabletop-Clean-For-Dinner-v1",
+      "instruction": "Arrange the bowl, fork onto the plate, clean for dinner ",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Clean-For-Dinner-v1"
+    },
+    {
+      "name": "Tabletop-Clean-For-Dinner-v1",
+      "instruction": "place the bowl and fork on the plate",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Clean-For-Dinner-v1"
+    },
+    {
+      "name": "Tabletop-Clean-For-Dinner-v1",
+      "instruction": "tidy up the table for dinner",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Clean-For-Dinner-v1"
+    },
+    {
+      "name": "Tabletop-Close-Cabinet-v1",
+      "instruction": "close the cabinet door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Close-Cabinet-v1"
+    },
+    {
+      "name": "Tabletop-Close-Cabinet-v1",
+      "instruction": "shut the cabinet door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Close-Cabinet-v1"
+    },
+    {
+      "name": "Tabletop-Close-Cabinet-v1",
+      "instruction": "close the door of the cabinet",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Close-Cabinet-v1"
+    },
+    {
+      "name": "Tabletop-Open-Cabinet-v1",
+      "instruction": "open the cabinet door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Cabinet-v1"
+    },
+    {
+      "name": "Tabletop-Open-Cabinet-v1",
+      "instruction": "pull open the cabinet door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Cabinet-v1"
+    },
+    {
+      "name": "Tabletop-Open-Cabinet-v1",
+      "instruction": "unlock and swing open the cabinet door",
+      "hdf5_dir": "/home/wangxianhao/data/project/reasoning/Datasets/datasets_2/e21754a84f6e80ad7af87f54d432a1a4e4683538/Tabletop-Open-Cabinet-v1"
+    }
+  ]
+}
