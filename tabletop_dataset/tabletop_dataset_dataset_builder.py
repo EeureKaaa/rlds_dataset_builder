@@ -11,10 +11,10 @@ from PIL import Image
 import json
 import argparse
 
-DEFAULT_CONFIG_PATH = "/home/wangxianhao/data/project/reasoning/rlds_dataset_builder/tabletop_dataset/dataset_configs.json"
+DEFAULT_CONFIG_PATH = "/home/wangxianhao/data/project/reasoning/rlds_dataset_builder/tabletop_dataset/dataset_config.json"
 
-class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
-    """DatasetBuilder for Tabletop-Lift-Book dataset."""
+class TestDatasetV1(tfds.core.GeneratorBasedBuilder):
+    """DatasetBuilder for Tabletop dataset."""
 
     VERSION = tfds.core.Version('1.0.0')
     RELEASE_NOTES = {
@@ -56,6 +56,18 @@ class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
                             dtype=np.uint8,
                             encoding_format='png',
                             doc='Base front camera RGB observation.',
+                        ),
+                        'left_image': tfds.features.Image(
+                            shape=(224, 224, 3),
+                            dtype=np.uint8,
+                            encoding_format='png',
+                            doc='Left camera RGB observation.',
+                        ),
+                        'right_image': tfds.features.Image(
+                            shape=(224, 224, 3),
+                            dtype=np.uint8,
+                            encoding_format='png',
+                            doc='Right camera RGB observation.',
                         ),
                         'joint_state': tfds.features.Tensor(
                             shape=(7,),
@@ -136,6 +148,8 @@ class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
                     base_rgb = np.array(f['traj_0/obs/sensor_data/base_camera/rgb'])
                     base_front_rgb = np.array(f['traj_0/obs/sensor_data/base_front_camera/rgb'])
                     hand_rgb = np.array(f['traj_0/obs/sensor_data/hand_camera/rgb'])
+                    left_rgb = np.array(f['traj_0/obs/sensor_data/left_camera/rgb'])
+                    right_rgb = np.array(f['traj_0/obs/sensor_data/right_camera/rgb'])
 
                     # Get robot state
                     qpos = np.array(f['traj_0/obs/agent/qpos'])
@@ -154,6 +168,8 @@ class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
                         base_img = tf.image.resize(base_rgb[i], [224, 224], method='lanczos3').numpy().astype(np.uint8) 
                         base_front_img = tf.image.resize(base_front_rgb[i], [224, 224], method='lanczos3').numpy().astype(np.uint8)
                         hand_img = tf.image.resize(hand_rgb[i], [224, 224], method='lanczos3').numpy().astype(np.uint8)
+                        left_img = tf.image.resize(left_rgb[i], [224, 224], method='lanczos3').numpy().astype(np.uint8)
+                        right_img = tf.image.resize(right_rgb[i], [224, 224], method='lanczos3').numpy().astype(np.uint8)
 
                         # Extract joint state (first 7 dimensions of qpos)
                         joint_state = qpos[i][:7] if qpos[i].shape[0] >= 7 else np.pad(qpos[i], (0, 7 - qpos[i].shape[0]))
@@ -166,6 +182,8 @@ class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
                                 'image': base_img,
                                 'wrist_image': hand_img,
                                 'base_front_image': base_front_img,
+                                'left_image': left_img,
+                                'right_image': right_img,
                                 'joint_state': joint_state,
                                 'state': state,
                             },
@@ -205,7 +223,10 @@ class PrimitiveDatasetV1(tfds.core.GeneratorBasedBuilder):
             for episode_path in episode_paths:
                 result = _parse_example(episode_path, instruction, language_embedding)
                 if result is not None:
-                    yield result
+                    # Create a unique key by combining the episode path with the instruction
+                    episode_path, sample = result
+                    unique_key = f"{episode_path}_{hash(instruction)}"
+                    yield unique_key, sample
 
 def main():
     parser = argparse.ArgumentParser(description='Build RLDS dataset from HDF5 files')
